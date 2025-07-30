@@ -180,7 +180,7 @@ def generate_text(topic, slides, language):
 # === Создание презентации ===
 def create_ppt(state, text):
     prs = Presentation()
-    slides = text.strip().split("
+   slides = text.strip().split("\n")
 ")
     for s in slides:
         if ':' in s:
