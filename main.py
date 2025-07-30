@@ -180,8 +180,7 @@ def generate_text(topic, slides, language):
 # === Создание презентации ===
 def create_ppt(state, text):
     prs = Presentation()
-   slides = text.strip().split("\n")
-")
+    slides = text.strip().split("\n")
     for s in slides:
         if ':' in s:
             title, content = s.split(':', 1)
@@ -192,6 +191,5 @@ def create_ppt(state, text):
     filename = f"presentation_{state['topic'].replace(' ', '_')}.pptx"
     prs.save(filename)
     return filename
-
 # === Запуск бота ===
 bot.polling(none_stop=True)
