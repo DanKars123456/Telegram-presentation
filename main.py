@@ -128,3 +128,4 @@ def generate_presentation(state):
 
 
 if __name__ == "__main__":
+    bot.polling(non_stop=True)
