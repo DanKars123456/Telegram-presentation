@@ -5,8 +5,8 @@ import os
 import logging
 
 # === Настройки ===
-TELEGRAM_TOKEN = 'ВАШ_ТЕЛЕГРАМ_ТОКЕН'  # Укажите свой Telegram токен
-OPENAI_API_KEY = 'ВАШ_OPENAI_API_KEY'  # Укажите свой OpenAI API ключ
+TELEGRAM_TOKEN = '8237141546:AAH4Duh0H3B7kjGn5hfu5Z4DbiaxjBY383c'  # Укажите свой Telegram токен
+OPENAI_API_KEY = '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'  # Укажите свой OpenAI API ключ
 openai.api_key = OPENAI_API_KEY
 
 # Инициализация бота
