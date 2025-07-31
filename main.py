@@ -161,19 +161,21 @@ def handle_message(message):
             bot.send_message(message.chat.id, f"Ошибка: {e}")
 
 # === Генерация текста презентации ===
-def generate_text(topic, slides, language):
-    prompt = f"Создай структуру презентации на тему '{topic}' из {slides} слайдов на языке: {language}."
+from openai import OpenAIError  # добавь это вверху main.py вместе с другими импортами
+
+def generate_and_send_presentation(message):
+    state = user_states[message.chat.id]
+    bot.send_message(message.chat.id, "Генерирую презентацию...")
+
     try:
-        model = "gpt-4"
-        response = openai.ChatCompletion.create(
-            model=model,
-            messages=[{"role": "user", "content": prompt}]
-        )
-    except openai.error.InvalidRequestError:
-        model = "gpt-3.5-turbo"
-        response = openai.ChatCompletion.create(
-            model=model,
-            messages=[{"role": "user", "content": prompt}]
+        text = generate_text(state["topic"], state["slides"], state["language"])
+        file_path = create_pptx(state["topic"], text, ", ".join(state["names"]), state["design"], state["font"], state["content_style"])
+        bot.send_document(message.chat.id, open(file_path, 'rb'))
+        os.remove(file_path)
+    except OpenAIError as e:
+        bot.send_message(message.chat.id, f"Ошибка OpenAI: {e}")
+    except Exception as e:
+        bot.send_message(message.chat.id, f"Ошибка: {e}")
         )
     return response.choices[0].message.content
 
