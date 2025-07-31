@@ -175,8 +175,11 @@ def generate_and_send_presentation(message):
     except OpenAIError as e:
         bot.send_message(message.chat.id, f"Ошибка OpenAI: {e}")
     except Exception as e:
-      bot.send_message(message.chat.id, "Ошибка при генерации: " + str(e)) return 
-    response.choices[0].message.content
+  response = client.chat.completions.create(
+        model="gpt-4",
+        messages=messages
+    )
+    return response.choices[0].message.content 
 
 # === Создание презентации ===
 def create_ppt(state, text):
